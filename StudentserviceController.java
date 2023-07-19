@@ -25,12 +25,9 @@ public class StudentserviceController {
     
 @RequestMapping(value = "/", method = RequestMethod.GET)
 @CircuitBreaker(name =STUDENT_SERV,fallbackMethod = "getAllAvailableCourses")
-//@Retry(name = STUDENT_SERV,fallbackMethod = "getAllAvailableCourses")
 
 public List<Courses> getCourses(){
     return restTemplate.getForObject(courseServURL,ArrayList.class);
-       // coursesService.findAll();
-
 	}
     public List<Courses> getAllAvailableCourses(Exception e){
         return Stream.of( new Courses(1, "Automata", "SoftwareEngineering", 100)
